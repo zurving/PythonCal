@@ -6,6 +6,10 @@ class script(object):
     def script(self):
         cherrypy.response.headers['Content-Type'] = 'application/javascript'
         data = '''
+
+        var monthname = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+        var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
+
         function fetchData(){
           $.get( "/update/update/", {}, onUpdate );
         }
@@ -36,6 +40,8 @@ class script(object):
           if( $("#clendardiv").length < 1 ){
             var b = $("body");
             b.html("");
+            var timediv = $("<div id=\\"timediv\\"/>" );
+            b.append( timediv );
             var calendardiv = $("<div id=\\"calendardiv\\"/>" );
             b.append( calendardiv );
             var closediv = $("<div id=\\"closediv\\">X</div>" ).click(requestShutdown);
@@ -49,6 +55,8 @@ class script(object):
 
         function onUpdate( data ){
           renderPage();
+          var now = new Date();
+          $("#timediv").html( daysOfTheWeek[ now.getDay() ] + " " + monthname[ now.getMonth() ] + " " + now.getDate() );
           var events = data.calendar;
           for( var i=0; i < events.length; i++ ){
             addEvent( events[i], i );

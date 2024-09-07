@@ -52,9 +52,22 @@ class index(object):
                 text-align: right;
               }
 
+              #timediv{
+                position: absolute;
+                top: 10px;
+                height: 32px;
+                left: 10px;
+                width: 384px;
+                overflow:hidden;
+                font-size: 30px;
+                text-align: left;
+              }
+
               #closediv{
+                /*
                 border: solid 1px white;
                 border-radius: 3px;
+                */
                 position: absolute;
                 top: 10px;
                 height: 32px;
